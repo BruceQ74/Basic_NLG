@@ -173,6 +173,7 @@ class Instructor:
         return 0
 
     def prepare_model_optimizer(self):
+        n_vocab = self.tokenizer.vocab_size
         model = EncoderDecoder(d_model = self.args.d_model, n_vocab = n_vocab, num_layers=self.args.num_layers)
         print("Model: Transformer")
         print("build model...")
