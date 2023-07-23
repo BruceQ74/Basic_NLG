@@ -52,8 +52,7 @@ class DataProcessor(object):
         examples = []
         input_ = lines[0][0]
         output_ = lines[0][1]
-        assert len(entity_pair) == len(relations)
-        length = len(relations)
+        length = len(input_)
         for i in range(length):
             guid = "%s-%s" % (set_type, i+1)
             _input = input_[i]
