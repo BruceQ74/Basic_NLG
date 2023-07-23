@@ -82,7 +82,7 @@ class DataProcessor(object):
                 input_text.append(splits[0])
                 output_text.append(splits[1])
 
-            if len(entity_pair) > 0:
+            if len(input_text) > 0:
                 data.append((input_text, output_text))
         return data
 
