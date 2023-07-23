@@ -185,7 +185,8 @@ class Instructor:
             checkpoint_model = torch.load(output_model_file, map_location="cpu")
             model.load_state_dict(checkpoint_model)
         else:
-            model._reset_params(self.args.initializer)
+            # model._reset_params(self.args.initializer)
+            pass
 
         model = model.to(self.args.device)
 
