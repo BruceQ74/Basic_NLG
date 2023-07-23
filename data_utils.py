@@ -50,6 +50,7 @@ class DataProcessor(object):
 
     def _create_examples(self, lines, set_type):
         examples = []
+        print(lines[0][0])
         input_ = lines[0][0]
         output_ = lines[0][1]
         length = len(input_)
