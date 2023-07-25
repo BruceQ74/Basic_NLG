@@ -41,7 +41,7 @@ class DataProcessor(object):
     def get_dev_examples(self):
         """See base class."""
         return self._create_examples(
-            self._read_txt(os.path.join(self.data_dir, "valid.txt")), "dev")
+            self._read_txt(os.path.join(self.data_dir, "dev.txt")), "dev")
 
     def get_test_examples(self):
         """See base class."""
@@ -50,7 +50,6 @@ class DataProcessor(object):
 
     def _create_examples(self, lines, set_type):
         examples = []
-        print(lines[0][0])
         input_ = lines[0][0]
         output_ = lines[0][1]
         length = len(input_)
@@ -170,11 +169,11 @@ class DataProcessor(object):
         #test
         test_examples = self.get_test_examples()
         test_features = self.convert_to_feature(tokenizer, test_examples, args.max_seq_len)
-        test_dataloader = self.get_dataloader(test_features, mode="test", batch_size=args.batch_size)
+        test_dataloader = self.get_dataloader(test_features, mode="test", batch_size=1)
 
         #dev
         dev_examples = self.get_dev_examples()
         dev_features = self.convert_to_feature(tokenizer, dev_examples, args.max_seq_len)
-        dev_dataloader = self.get_dataloader(dev_features, mode="dev", batch_size=args.batch_size)
+        dev_dataloader = self.get_dataloader(dev_features, mode="dev", batch_size=1)
 
         return train_dataloader, dev_dataloader, test_dataloader

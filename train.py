@@ -119,7 +119,7 @@ class Instructor:
                 global_step += 1
 
             if global_step % self.args.log_step == 0:
-                logger.info('global_step: {}, loss: {:.4f}, lr: {:.6f}'.format(global_step, train_loss, optimizer.param_groups[0]['lr']))
+                logger.info('global_step: {}, loss: {:.4f}, lr: {:.6f}'.format(global_step, average_loss / i_batch, optimizer.param_groups[0]['lr']))
         return global_step
 
     def _train(self, model, optimizer, scheduler, train_data_loader, dev_dataloader, test_dataloader):
@@ -162,13 +162,20 @@ class Instructor:
                 logits = model.generate(input_ids, output_ids, self.args.max_generation_len)
 
                 if mode == "test":
-                    test_results.extend(logits)
-                    label_evaluation.extend(output_ids)
+                    test_results.append(logits)
+                    label_evaluation.append(output_ids.view(-1).tolist())
     
         if mode == "test":
             with open("test_result.txt", "w") as f:
                 for i_, j_ in zip(test_results, label_evaluation):
-                    f.write("{}\t{}\n".format(self.tokenizer.convert_ids_to_tokens(i_.item()), self.tokenizer.convert_ids_to_tokens(j_.item())))
+                    _i = []
+                    _j = []
+                    for k, l in zip(i_, j_):
+                        _i.append(self.tokenizer.convert_ids_to_tokens(k))
+                        _j.append(self.tokenizer.convert_ids_to_tokens(l))
+                    generation = ' '.join(_i)
+                    original = ' '.join(_j)
+                    f.write("{}\t{}\n".format(generation, original))
 
         return 0
 
