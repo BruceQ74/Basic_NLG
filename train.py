@@ -175,7 +175,7 @@ class Instructor:
                         _j.append(self.tokenizer.convert_ids_to_tokens(l))
                     generation = ' '.join(_i)
                     original = ' '.join(_j)
-                    f.write("{}\t{}\n".format(generation, original))
+                    f.write("Original: {}\n Generation: {}\n----------------------------------------\n".format(original, generation))
 
         return 0
 
