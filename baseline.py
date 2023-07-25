@@ -106,7 +106,7 @@ class EncoderDecoder(nn.Module):
         eos_token = torch.tensor([102], dtype = torch.long).to(output_word_ids.device)
         for _ in range(max_generation_len):
             # Need change
-            # Now: [ ] * 15 + [CLS]
+            # Now: [PAD] * 15 + [CLS]
             output_word_ids = torch.cat([output_word_ids, generated_word], dim = 1)[:, 1:]
             output_hidden_representation = self.embedding(output_word_ids)
             generated_word_logits = self.tgt_word_proj(self.decoder(output_hidden_representation, hidden_states))
