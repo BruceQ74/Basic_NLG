@@ -138,8 +138,9 @@ class Instructor:
             # dev_result = self._evaluate(model, dev_dataloader)
             # logger.info("Epoch {}, Dev results: {}".format(epoch, dev_result))
 
-        test_result = self._evaluate(model, test_dataloader, mode = "test")
-        # logger.info("Epoch {}, Test results: {}".format(epoch, test_result))
+            test_result = self._evaluate(model, test_dataloader, mode = "test")
+            # logger.info("Epoch {}, Test results: {}".format(epoch, test_result))
+            logger.info("Epoch {}, Test dataset done.".format(epoch))
         
         return path
 
