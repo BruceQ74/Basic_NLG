@@ -171,8 +171,10 @@ class Instructor:
                     _i = []
                     _j = []
                     for k, l in zip(i_, j_):
-                        _i.append(self.tokenizer.convert_ids_to_tokens(k))
-                        _j.append(self.tokenizer.convert_ids_to_tokens(l))
+                        if k != 0:
+                            _i.append(self.tokenizer.convert_ids_to_tokens(k))
+                        if l != 0:
+                            _j.append(self.tokenizer.convert_ids_to_tokens(l))
                     generation = ' '.join(_i)
                     original = ' '.join(_j)
                     f.write("Original: {}\nGeneration: {}\n----------------------------------------\n".format(original, generation))
@@ -274,8 +276,8 @@ def get_args():
     parser.add_argument('--hidden_dim', default=300, type=int)
     parser.add_argument('--d_model', default=512, type=int)
     parser.add_argument('--bert_dim', default=1024, type=int)
-    parser.add_argument('--max_seq_len', default=16, type=int)
-    parser.add_argument('--max_generation_len', default=16, type=int)
+    parser.add_argument('--max_seq_len', default=32, type=int)
+    parser.add_argument('--max_generation_len', default=32, type=int)
     parser.add_argument('--device', default=None, type=str)
     parser.add_argument('--seed', default=42, type=int)
     parser.add_argument('--bert_model', default='bert-large-uncased', type=str)
